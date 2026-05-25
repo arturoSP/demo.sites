@@ -64,8 +64,10 @@ function applyLanguage(lang) {
     if (ariaLabel) floatingActions.setAttribute("aria-label", ariaLabel);
   }
 
-  document.querySelectorAll("[data-es][data-en]").forEach((element) => {
-    element.innerHTML = element.textContent(`data-${lang}`) || "";
+  const translatableElements = document.querySelectorAll("[data-es], [data-en]");
+  translatableElements.forEach((element) => {
+    const translated = element.getAttribute(`data-${lang}`);
+    if (translated !== null) element.textContent = translated;
   });
 
   const statusEl = document.getElementById("demo-status");
